@@ -1,0 +1,88 @@
+{
+    "login": {
+        "title": "Login",
+        "login": "Login",
+        "signup": "Signup",
+        "email": "Email",
+        "password": "Password"
+
+    },
+    "signup" : {
+        "title": "Signup",
+        "signup": "Signup",
+        "name": "Name",
+        "email": "Email",
+        "mobile": "Mobile",
+        "countryCode": "Code",
+        "password": "Password",
+        "confirmPassword": "Confirm Password"
+    },
+    "account": {
+        "title": "Account",
+        "account": "Account",
+        "updatePicture": "Update Picture",
+        "changeUsername": "Change Username",
+        "changePassword": "Change Password",
+        "support": "Support",
+        "logout": "Logout"
+
+    },
+    "app": {
+        "invite": "You selected {{lang}}",
+        "changeLanguage": "Change Language"
+    },
+    "tabs": {
+        "products" : "Products",
+        "addProduct": "Add Product"
+    },
+    "home": {
+        "title": "Products",
+        "productList": "Product List"
+    },
+    "details": {
+        "title": "Product Details",
+        "price": "Price",
+        "description": "Description",
+        "edit": "Edit",
+        "delete": "Delete",
+        "productDetails": "Product Details"
+    },
+    "add": {
+        "title": "Add Product",
+        "name": "Name",
+        "price": "Price",
+        "description": "Description",
+        "add": "Add",
+        "addProduct": "Add Product"
+    },
+    "edit": {
+        "title": "Edit Product",
+        "name": "Name",
+        "price": "Price",
+        "description": "Description",
+        "update": "Update",
+        "editProduct": "Edit Product"
+    },
+    "validations": {
+        "nameRequired": "Username is required.",
+        "nameMinLength": "Username must be at least 5 characters long.",
+        "nameMaxLength": "Username cannot be more than 25 characters long.",
+        "namePattern": "Your username must contain only numbers and letters.",
+        "validUsername": "Your username has already been taken.",
+        "emailRequired" : "Email is required.",
+        "emailPattern": "Email is not valid.",
+        "emailIsUsedBefore": "ُEmail is used before.",
+        "mobileRequired": "Mobile number is required.",
+        "mobileMinLength": "Mobile number must be at least 8 numbers.",
+        "mobileMaxLength": "Mobile number cannot be more than 15 number.",
+        "mobilePattern": "Mobile number should contain numebers only.",
+        "mobileNotValid": "Mobile number should contain numebers only.",
+        "countryRequired": "Country code is required.",
+        "passwordRequired": "Password is required.",
+        "passwordPattern": "Password is not valid.",
+        "confirmPasswordRequired": "Confirm password is required.",
+        "confirmPasswordPattern": "Confirm password is not valid.",
+        "confirmPasswordEqualTo": "Confirm password mismatch."
+    },
+    "Language": "Language"
+}

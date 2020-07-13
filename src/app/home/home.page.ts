@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 
-import { ProductService } from '../shared/product.service';
-import { UserData } from '../providers/user-data';
+import { ProductService } from '../services/product.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -12,25 +12,21 @@ import { UserData } from '../providers/user-data';
 })
 
 export class HomePage implements OnInit {
+  title: string = 'home.title';
   products: any = [];
 
   constructor(private router: Router,
     private storage: Storage,
     private productService: ProductService,
-    private userData: UserData
+    private userAPI: UserService
   ) {}
 
   ngOnInit() {}
 
   ionViewDidEnter() {
-    let loggedIn = this.userData.isLoggedIn();
-    if (loggedIn) {
-      this.productService.getProductList().subscribe((res) => {
-        this.products = res;
-      })
-    } else {
-        this.router.navigateByUrl('/login');
-    }
+    this.productService.getProductList().subscribe((res) => {
+      this.products = res;
+    });
   }
 
   deleteProduct(product) {

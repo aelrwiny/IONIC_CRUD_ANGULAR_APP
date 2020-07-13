@@ -1,3 +1,4 @@
+<!--
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -7,12 +8,12 @@
     <ion-title>Ionic APP</ion-title>
   </ion-toolbar>
 </ion-header>
+-->
+<app-header [isShowMenu]='true' [isShowBack]='false' [isShowLocale]='true' [title]='title'></app-header>
 
 <ion-content>
   <ion-list class="ios list-ios hydrated">
-    <ion-list-header class="ios hydrated">
-      Product List
-    </ion-list-header>
+    <ion-list-header class="ios hydrated">{{ 'home.productList' | translate}}</ion-list-header>
 
     <ion-item *ngFor="let product of products" class="item-label item ios in-list ion-focusable hydrated">
       <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">

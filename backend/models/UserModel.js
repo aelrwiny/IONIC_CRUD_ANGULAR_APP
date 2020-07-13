@@ -2,12 +2,18 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let UserSchema = new Schema({
-        user_name: { type: String},
-        password: {type: String},
+        username: { type: String},
         email: { type: String },
-        mobile_number: {type: String},
-        date_created: { type: Date, default: Date.now, immutable: true},
-        date_updated: { type: Date, default: Date.now}
+        mobile: {type: String},
+        password: {type: String},
+        country: {
+            id: { type: Number },
+            isoCode: { type: String },
+            key: { type: String },
+            name: { type: String }
+        },
+        dateCreated: { type: Date, default: Date.now, immutable: true},
+        dateUpdated: { type: Date, default: Date.now}
     },
     {
         collections: 'users'

@@ -1,34 +1,36 @@
+<!--
 <ion-header>
   <ion-toolbar class="ios hydrated">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
     </ion-buttons>
-    <ion-title class="ios title-ios hydrated">Add Product</ion-title>
+    <ion-title class="ios title-ios hydrated">{{ 'add.addProduct' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
-
+-->
+<app-header [isShowMenu]='false' [isShowBack]='true' [isShowLocale]='true' [title]='title'></app-header>
 
 <ion-content>
   <ion-list lines="full" class="ion-no-margin ion-no-padding ios list-ios list-lines-full list-ios-lines-full hydrated">
     <form [formGroup]="addProductForm" (ngSubmit)="onFormSubmit()">
       <ion-item>
-        <ion-label position="floating" color="primary">Product Name</ion-label>
+        <ion-label position="floating" color="primary">{{ 'add.name' | translate }}</ion-label>
         <ion-input type="text" formControlName="product_name" required></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating" color="primary">Product Price</ion-label>
+        <ion-label position="floating" color="primary">{{ 'add.price' | translate }}</ion-label>
         <ion-input type="number" formControlName="product_price" required></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating" color="primary">Product Description</ion-label>
+        <ion-label position="floating" color="primary">{{ 'add.description' | translate }}</ion-label>
         <ion-textarea formControlName="product_desc"></ion-textarea>
       </ion-item>
 
       <ion-row>
         <ion-col>
-          <ion-button type="submit" shape="round" color="primary" expand="block">Add Product</ion-button>
+          <ion-button type="submit" color="primary" expand="block">{{ 'add.add' | translate }}</ion-button>
         </ion-col>
       </ion-row>
     </form>

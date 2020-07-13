@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController, AlertController } from '@ionic/angular';
 
-import { ProductService } from '../shared/product.service';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-details',
@@ -11,6 +11,7 @@ import { ProductService } from '../shared/product.service';
 })
 export class DetailsPage implements OnInit {
 
+  title: string = 'details.title';
   private product: any = null;
   private id: any;
 

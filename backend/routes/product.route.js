@@ -5,7 +5,7 @@ const ProductRoute = express.Router();
 let ProductModel = require('../models/ProductModel.js');
 
 // Add Product
-ProductRoute.route('/create-product').post((req, res, next) => {
+ProductRoute.route('/create').post((req, res, next) => {
   ProductModel.create(req.body, (error, data) => {
     if (error) {
       console.log(error);
@@ -29,7 +29,7 @@ ProductRoute.route('/').get((req, res) => {
 })
 
 // Get single product
-ProductRoute.route('/get-product/:id').get((req, res) => {
+ProductRoute.route('/get/:id').get((req, res) => {
   ProductModel.findById(req.params.id, (error, data) => {
     if (error) {
       return next(error)
@@ -40,7 +40,7 @@ ProductRoute.route('/get-product/:id').get((req, res) => {
 })
 
 // Update product
-ProductRoute.route('/update-product/:id').put((req, res, next) => {
+ProductRoute.route('/update/:id').put((req, res, next) => {
   ProductModel.findByIdAndUpdate(req.params.id, {
     $set: req.body
   }, (error, data) => {
@@ -55,7 +55,7 @@ ProductRoute.route('/update-product/:id').put((req, res, next) => {
 })
 
 // Delete product
-ProductRoute.route('/delete-product/:id').delete((req, res, next) => {
+ProductRoute.route('/delete/:id').delete((req, res, next) => {
   ProductModel.findByIdAndRemove(req.params.id, (error, data) => {
     if (error) {
       return next(error);

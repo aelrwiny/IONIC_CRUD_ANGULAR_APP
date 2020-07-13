@@ -1,15 +1,17 @@
+<!--
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-
-    <ion-title>Login</ion-title>
+    <ion-title>{{ 'login.login' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
+-->
+
+<app-header [isShowMenu]='true' [isShowBack]='false' [isShowLocale]='true' [title]='title'></app-header>
 
 <ion-content>
-  
   <form #loginForm="ngForm" novalidate>
     <div class="login-logo">
       <img src="assets/img/appicon.svg" alt="Ionic logo">
@@ -17,20 +19,19 @@
     
     <ion-list>
       <ion-item>
-        <ion-label position="stacked" color="primary">Username</ion-label>
-        <ion-input [(ngModel)]="login.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
-          required>
+        <ion-label position="stacked" color="primary">{{ 'login.email' | translate }}</ion-label>
+        <ion-input [(ngModel)]="login.email" name="email" type="text" #email="ngModel" spellcheck="false" autocapitalize="off" required>
         </ion-input>
       </ion-item>
 
       <ion-text color="danger">
-        <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
+        <p [hidden]="email.valid || submitted == false" class="ion-padding-start">
           Username is required
         </p>
       </ion-text>
 
       <ion-item>
-        <ion-label position="stacked" color="primary">Password</ion-label>
+        <ion-label position="stacked" color="primary">{{ 'login.password' | translate }}</ion-label>
         <ion-input [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required>
         </ion-input>
       </ion-item>
@@ -44,10 +45,10 @@
 
     <ion-row>
       <ion-col>
-        <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">Login</ion-button>
+        <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">{{ 'login.login' | translate }}</ion-button>
       </ion-col>
       <ion-col>
-        <ion-button (click)="onSignup()" color="light" expand="block">Signup</ion-button>
+        <ion-button (click)="onSignup()" color="light" expand="block">{{ 'login.signup' | translate }}</ion-button>
       </ion-col>
     </ion-row>
   </form>

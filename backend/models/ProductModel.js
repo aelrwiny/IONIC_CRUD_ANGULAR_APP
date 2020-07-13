@@ -16,7 +16,6 @@ let ProductSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'User'
     }
-
   }, {
     collection: 'products'
   })

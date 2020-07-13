@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-import { CheckHome } from './providers/check-home.service'
+import { CheckHome } from './providers/check.home.service'
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  /*{
+  {
     path: '',
-    redirectTo: '/tutorial',
+    redirectTo: '/app/tabs/home',
     pathMatch: 'full'
-  },*/
+  },
   {
     path: 'app',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
@@ -42,7 +43,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    
   ],
   exports: [RouterModule]
 })

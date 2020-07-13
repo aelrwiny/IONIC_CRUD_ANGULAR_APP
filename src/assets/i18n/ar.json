@@ -1,0 +1,88 @@
+{
+    "login": {
+        "title": "تسجيل الدخول",
+        "login": "تسجيل الدخول",
+        "signup": "مستخدم جديد",
+        "email": "البريد الإلكترونى",
+        "password": "كلمة المرور"
+
+    },
+    "signup" : {
+        "title": "التسجيل",
+        "signup": "التسجيل",
+        "name": "الإسم",
+        "email": "البريد الإلكترونى",
+        "mobile": "النقال",
+        "countryCode": "كود الدولة",
+        "password": "كلمة المرور",
+        "confirmPassword": "تأكيد كلمة المرور"
+    },
+    "account": {
+        "title": "حسابى",
+        "account": "حسابى",
+        "updatePicture": "تغيير الصورة",
+        "changeUsername": "تغيير إسم المستخدم",
+        "changePassword": "تغيير كلمة المرور",
+        "support": "الدعم",
+        "logout": "تسجيل الخروج"
+
+    },
+    "app": {
+        "invite": "تم إختيار {{lang}}",
+        "changeLanguage": "تغيير اللغة"
+    },
+    "tabs": {
+        "products" : "المنتجات",
+        "addProduct": "إضافة منتج"
+    },
+    "home": {
+        "title": "المنتجات",
+        "productList": "قائمة المنتجات"
+    },
+    "details": {
+        "title": "تفاصيل المنتج",
+        "price": "السعر",
+        "description": "الوصف",
+        "edit": "تعديل",
+        "delete": "حذف",
+        "productDetails": "تفاصيل المنتج"
+    },
+    "add": {
+        "title": "إضافة منتج",
+        "name": "الإسم",
+        "price": "السعر",
+        "description": "الوصف",
+        "add": "إضافة",
+        "addProduct": "إضافة منتج"
+    },
+    "edit": {
+        "title": "تعديل المنتج",
+        "name": "الإسم",
+        "price": "السعر",
+        "description": "الوصف",
+        "update": "تعديل",
+        "editProduct": "تعديل المنتج"
+    },
+    "validations": {
+        "nameRequired": "الإسم مطلوب",
+        "nameMinLength": "Username must be at least 5 characters long.",
+        "nameMaxLength": "Username cannot be more than 25 characters long.",
+        "namePattern": "Your username must contain only numbers and letters.",
+        "validUsername": "Your username has already been taken.",
+        "emailRequired" : "البريد الإلكترونى مطلوب",
+        "emailPattern": "البريد الإلكترونى غير صحيح",
+        "emailIsUsedBefore": "البريد الإلكترونى مستخدم من قبل",
+        "mobileRequired": "رقم النقال مطلوب",
+        "mobileMinLength": "رقم النقال لابد أن يكون 8 أرقام على الأقل",
+        "mobileMaxLength": "رقم النقال لا يمكن أن يكون أكثر من 15 رقم",
+        "mobilePattern": "رقم النقال لابد أن يحتوى أرقام فقط",
+        "mobileNotValid": "رقم النقال لابد أن يحتوى أرقام فقط",
+        "countryRequired": "رقم الدولة مطلوب",
+        "passwordRequired": "كلمة المرور مطلوبة",
+        "passwordPattern": "كلمة المرور لا تستوفى الشروط",
+        "confirmPasswordRequired": "يجب تأكيد كلمة المرور",
+        "confirmPasswordPattern": "تأكيد كلمة المرور لا يستوفى الشروط",
+        "confirmPasswordEqualTo": "تأكيد كلمة المرور غير مطابق لكلمة المرور"
+    },
+    "Language": "اللغة"
+}

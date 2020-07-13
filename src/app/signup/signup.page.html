@@ -1,67 +1,105 @@
+<!--
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Signup</ion-title>
+    <ion-title>{{ 'signup.signup' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
+-->
+
+<app-header [isShowMenu]='true' [isShowBack]='false' [isShowLocale]='true' [title]='title'></app-header>
 
 <ion-content>
-
-  <form #signupForm="ngForm" novalidate>
+  <form [formGroup]= "signupForm" (ngSubmit)="onSignup(signupForm)">
     <div class="signup-logo">
       <img src="assets/img/appicon.svg" alt="Ionic Logo">
     </div>
     
     <ion-list lines="none">
       <ion-item>
-        <ion-label position="stacked" color="primary">Username</ion-label>
-        <ion-input [(ngModel)]="signup.username" name="username" type="text" #username="ngModel" required>
-        </ion-input>
+        <ion-input formControlName="username" type="text" placeholder="{{ 'signup.name' | translate }}"></ion-input>
       </ion-item>
-      <ion-text color="danger">
-        <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
-          Username is required
-        </p>
-      </ion-text>
+      <div>
+        <ng-container *ngFor="let validation of validationMessages.username">
+          <div class="error-message" *ngIf="signupForm.get('username').hasError(validation.type) && (signupForm.get('username').dirty || signupForm.get('username').touched)">
+            <ion-text color="danger">
+              <p class="ion-padding-start">{{ 'validations.'+validation.message | translate:params }}</p>
+            </ion-text>
+          </div>
+        </ng-container>
+      </div>
 
       <ion-item>
-        <ion-label position="stacked" color="primary">Password</ion-label>
-        <ion-input [(ngModel)]="signup.password" name="password" type="password" #password="ngModel" required>
+        <ion-input formControlName="email" type="email" placeholder="{{ 'signup.email' | translate }}">
         </ion-input>
       </ion-item>
-      <ion-text color="danger">
-        <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
-          Password is required
-        </p>
-      </ion-text>
+      <div>
+        <ng-container *ngFor="let validation of validationMessages.email">
+          <div class="error-message" *ngIf="signupForm.get('email').hasError(validation.type) && (signupForm.get('email').dirty || signupForm.get('email').touched)">
+            <ion-text color="danger">
+              <p class="ion-padding-start">{{ 'validations.'+validation.message | translate:params }}</p>
+            </ion-text>
+          </div>
+        </ng-container>
+      </div>
 
       <ion-item>
-        <ion-label position="stacked" color="primary">Email</ion-label>
-        <ion-input [(ngModel)]="signup.email" name="email" type="text" #email="ngModel" required>
-        </ion-input>
+          <ion-select formControlName="country" placeholder="{{ 'signup.countryCode' | translate }}" interface="popover">
+              <ion-select-option *ngFor="let country of countries" [value]="country">{{country.key}} {{country.isoCode}}</ion-select-option>
+          </ion-select>
+        <ion-input formControlName="mobile" type="text" placeholder="{{ 'signup.mobile' | translate }}"></ion-input>
       </ion-item>
-      <ion-text color="danger">
-        <p [hidden]="email.valid || submitted == false" class="ion-padding-start">
-          Email is required
-        </p>
-      </ion-text>
+      <div>
+        <ng-container *ngFor="let validation of validationMessages.country">
+          <div class="error-message" *ngIf="signupForm.get('country').hasError(validation.type) && (signupForm.get('country').dirty || signupForm.get('country').touched)">
+            <ion-text color="danger">
+              <p class="ion-padding-start">{{ 'validations.'+validation.message | translate:params }}</p>
+            </ion-text>
+          </div>
+        </ng-container>
+      </div>
+      <div>
+        <ng-container *ngFor="let validation of validationMessages.mobile">
+          <div class="error-message" *ngIf="signupForm.get('mobile').hasError(validation.type) && (signupForm.get('mobile').dirty || signupForm.get('mobile').touched)">
+            <ion-text color="danger">
+              <p class="ion-padding-start">{{ 'validations.'+validation.message | translate:params }}</p>
+            </ion-text>
+          </div>
+        </ng-container>
+      </div>
 
       <ion-item>
-        <ion-label position="stacked" color="primary">Mobile</ion-label>
-        <ion-input [(ngModel)]="signup.mobile" name="mobile" type="text" #mobile="ngModel" required>
+        <ion-input formControlName="password" type="password" placeholder="{{ 'signup.password' | translate }}">
         </ion-input>
       </ion-item>
-      <ion-text color="danger">
-        <p [hidden]="mobile.valid || submitted == false" class="ion-padding-start">
-          Mobile is required
-        </p>
-      </ion-text>
+      <div>
+        <ng-container *ngFor="let validation of validationMessages.password">
+          <div class="error-message" *ngIf="signupForm.get('password').hasError(validation.type) && (signupForm.get('password').dirty || signupForm.get('password').touched)">
+            <ion-text color="danger">
+              <p class="ion-padding-start">{{ 'validations.'+validation.message | translate:params }}</p>
+            </ion-text>
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-input formControlName="confirmPassword" type="password" placeholder="{{ 'signup.confirmPassword' | translate }}">
+        </ion-input>
+      </ion-item>
+      <div>
+        <ng-container *ngFor="let validation of validationMessages.confirmPassword">
+          <div class="error-message" *ngIf="signupForm.get('confirmPassword').hasError(validation.type) && (signupForm.get('confirmPassword').dirty || signupForm.get('confirmPassword').touched)">
+            <ion-text color="danger">
+              <p class="ion-padding-start">{{ 'validations.'+validation.message | translate }}</p>
+            </ion-text>
+          </div>
+        </ng-container>
+      </div>
     </ion-list>
-
     <div class="ion-padding">
-      <ion-button (click)="onSignup(signupForm)" type="submit" expand="block">Create</ion-button>
+      <ion-button type="submit" color="primary" expand="block">{{ 'signup.signup' | translate }}</ion-button>
     </div>
   </form>
 

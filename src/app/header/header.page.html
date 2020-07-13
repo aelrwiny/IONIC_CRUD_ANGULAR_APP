@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar class="ios hydrated">
+    <ion-buttons *ngIf="isShowMenu" slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons *ngIf="isShowBack && !platform.isRTL" slot="start">
+      <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons *ngIf="isShowBack && platform.isRTL" slot="start">
+      <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ios title-ios hydrated">{{ title | translate }}</ion-title>
+    <ion-buttons *ngIf="isShowLocale" slot="end">
+        <button>
+          <img src="../../assets/icon/language.png" *ngIf="!this.platform.isRTL" (click)="changeLanguage('ar')" style="width:25px; height: 25px;">
+          <img src="../../assets/icon/language.png" *ngIf="this.platform.isRTL" (click)="changeLanguage('en')" style="width:25px; height: 25px;">
+        </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

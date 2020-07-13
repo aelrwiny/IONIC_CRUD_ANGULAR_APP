@@ -6,8 +6,12 @@ import  { Storage } from '@ionic/storage';
 import { MenuController, Platform, ToastController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { UserData } from './providers/user-data';
-import { CheckHome } from './providers/check-home.service'
+
+import { TranslateService } from '@ngx-translate/core';
+
+import { User } from './models/user';
+import { UserService } from './services/user.service';
+import { DocumentService } from './services/document.service';
 
 @Component({
   selector: 'app-root',
@@ -17,31 +21,25 @@ import { CheckHome } from './providers/check-home.service'
 
 export class AppComponent {
 
-  private username: string = '';
-  private password: string = '';
-  loggedIn = false;
-  dark = false;
-  appPages = [
-    /*
+  private language: string = 'en';
+  private loggedIn = false;
+  private dark = false;
+  private appPages = [
     {
-      title: 'Home',
+      titleEn: 'Products',
+      titleAr: 'المنتجات',
       url: '/app/tabs/home',
-      icon: 'home',
-      canLoad: this.checkHome.canLoad()
+      icon: 'home'
     },
     {
-      title: 'Add Product',
-      url: '/app/tabs/add-product',
-      icon: 'add'
-    },
-    */
-    {
-      title: 'Map',
+      titleEn: 'Map',
+      titleAr: 'الخريطة',
       url: '/map',
       icon: 'map'
     },
     {
-      title: 'About',
+      titleEn: 'About',
+      titleAr: 'معلومات',
       url: '/about',
       icon: 'information-circle'
     }
@@ -53,24 +51,25 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private storage: Storage,
-    private userData: UserData,
+    private userAPI: UserService,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
-    private checkHome: CheckHome
-  ) {
-  }
+    private translate: TranslateService,
+    private documentService: DocumentService) {
+      this.platform.ready().then(() => {
+        this.initTranslate();
+     });
+    }
 
-  async initializeApp() {
-    await this.platform.ready().then(() => {
+  initializeApp() {
+    this.platform.ready().then(() => {
       this.statusBar.styleDefault();
-      this.userData.logIn();
       this.splashScreen.hide();
     });
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.initializeApp();
-    this.checkLoginStatus();
     this.listenForLoginEvents();
 
     this.swUpdate.available.subscribe(async res => {
@@ -86,18 +85,39 @@ export class AppComponent {
       });
 
       await toast.present();
-
-      toast
-        .onDidDismiss()
+      toast.onDidDismiss()
         .then(() => this.swUpdate.activateUpdate())
         .then(() => window.location.reload());
     });
   }
 
-  checkLoginStatus() {
-    return this.userData.isLoggedIn().then(loggedIn => {
-      return this.updateLoggedInStatus(loggedIn);
+  async ionViewWillEnter() {
+    let email = '', password = '';
+    await this.storage.get('email').then((value) => {
+      if (value) {
+        email = value;
+      }
     });
+
+    await this.storage.get('password').then((value) => {
+      if (value) {
+        password = value;
+      }
+    });
+
+    if (email && password) {
+      let user: User;
+      let login: any = {email: email, password: password};
+      this.userAPI.loginUser(login)
+          .then((res) => {
+            if (res) {
+              window.dispatchEvent(new CustomEvent('user:login'));
+              return this.router.navigateByUrl('/app/tabs/home');
+            }
+          }, err => {
+            console.log(err);
+          });
+    }
   }
 
   updateLoggedInStatus(loggedIn: boolean) {
@@ -106,7 +126,7 @@ export class AppComponent {
     }, 300);
   }
 
-  async listenForLoginEvents() {
+  listenForLoginEvents() {
     window.addEventListener('user:login', () => {
       this.updateLoggedInStatus(true);
     });
@@ -120,8 +140,9 @@ export class AppComponent {
     });
   }
 
-  async logout() {
-    await this.userData.logout().then(() => {
+  logout() {
+    this.userAPI.logout().then(() => {
+      window.dispatchEvent(new CustomEvent('user:logout'));
       return this.router.navigateByUrl('/login');
     });
   }
@@ -130,5 +151,37 @@ export class AppComponent {
     this.menu.enable(false);
     this.storage.set('ion_did_tutorial', false);
     this.router.navigateByUrl('/tutorial');
+  }
+
+  private initTranslate() {
+    this.translate.setDefaultLang('en');
+    this.documentService.setDirection('ltr');
+  }
+
+  /*
+  changeLanguage() {
+    if (this.language === 'ar') {
+      this.translate.use('ar');
+      this.documentService.setReadingDirection('rtl');
+    } else if (this.language === 'en') {
+      this.translate.use('en');
+      this.documentService.setReadingDirection('ltr');
+    }
+    this.menu.toggle();
+  }
+  */
+
+  changeLanguage(language: string) {
+    if (language === 'ar') {
+      this.translate.use('ar');
+      this.documentService.setDirection('rtl');
+      this.menu.enable(true, "rtlMenu");
+      this.menu.enable(false, "ltrMenu");
+    } else if (language === 'en') {
+      this.translate.use('en');
+      this.documentService.setDirection('ltr');
+      this.menu.enable(false, "rtlMenu");
+      this.menu.enable(true, "ltrMenu");
+    }
   }
 }

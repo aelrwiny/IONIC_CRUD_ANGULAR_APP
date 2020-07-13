@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Product } from './product';
+import { Product } from '../models/product';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-const apiUrl = "http://localhost:3000/api/get-product";
+const apiUrl = "http://localhost:3000/api/product/get";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   addProduct(product: Product): Observable<any> {
-    return this.http.post<Product>('http://localhost:3000/api/create-product', product, this.httpOptions)
+    return this.http.post<Product>('http://localhost:3000/api/product/create', product, this.httpOptions)
       .pipe(
         catchError(this.handleError<Product>('Add Product'))
       );
@@ -35,7 +35,7 @@ export class ProductService {
 
 
   getOneProduct(id): Observable<Product> {
-    var url = 'http://localhost:3000/api/get-product/' + id;
+    var url = 'http://localhost:3000/api/product/get/' + id;
     return this.http.get<Product>(url)
     .pipe(
         tap(_ => console.log(`Product fetched: ${id}`)),
@@ -44,7 +44,7 @@ export class ProductService {
   }
 
   getProductList(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://localhost:3000/api')
+    return this.http.get<Product[]>('http://localhost:3000/api/product')
       .pipe(
         tap(Products => console.log('Products fetched!')),
         catchError(this.handleError<Product[]>('Get Products', []))
@@ -52,7 +52,7 @@ export class ProductService {
   }
 
   updateProduct(id, Product: Product): Observable<any> {
-    return this.http.put('http://localhost:3000/api/update-product/' + id, Product, this.httpOptions)
+    return this.http.put('http://localhost:3000/api/product/update/' + id, Product, this.httpOptions)
       .pipe(
         tap(_ => console.log(`Product updated: ${id}`)),
         catchError(this.handleError<Product>('Update Product'))
@@ -60,7 +60,7 @@ export class ProductService {
   }
 
   deleteProduct(id): Observable<Product> {
-    return this.http.delete<Product>('http://localhost:3000/api/delete-product/' + id, this.httpOptions)
+    return this.http.delete<Product>('http://localhost:3000/api/product/delete/' + id, this.httpOptions)
       .pipe(
         tap(_ => console.log(`Product deleted: ${id}`)),
         catchError(this.handleError<Product>('Delete Product'))

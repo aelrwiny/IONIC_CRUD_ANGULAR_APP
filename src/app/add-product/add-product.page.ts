@@ -2,7 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
-import { ProductService } from '../shared/product.service';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-add-product',
@@ -12,6 +12,7 @@ import { ProductService } from '../shared/product.service';
 
 export class AddProductPage implements OnInit {
 
+  title: string = 'add.title';
   addProductForm: FormGroup;
 
   constructor(private productAPI: ProductService,
@@ -31,7 +32,6 @@ export class AddProductPage implements OnInit {
     if (!this.addProductForm.valid) {
       return false;
     } else {
-      console.log(this.addProductForm.value);
       this.productAPI.addProduct(this.addProductForm.value)
         .subscribe((res) => {
           this.zone.run(() => {

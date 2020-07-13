@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { LoadingController, AlertController } from '@ionic/angular';
 
-import { ProductService } from '../shared/product.service';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -12,6 +12,7 @@ import { ProductService } from '../shared/product.service';
 })
 export class EditProductPage implements OnInit {
 
+  title: string = 'edit.title';
   updateProductForm: FormGroup;
   id: any;
 
@@ -61,7 +62,7 @@ export class EditProductPage implements OnInit {
         .subscribe((res) => {
           console.log(res)
           this.updateProductForm.reset();
-          this.router.navigate(['/home']);
+          this.router.navigate(['/app/tabs/home']);
         }, err => {
           console.log(err);
         });

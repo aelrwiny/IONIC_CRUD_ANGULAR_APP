@@ -2,23 +2,24 @@ import { AfterViewInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AlertController } from '@ionic/angular';
+import  { Storage } from '@ionic/storage';
 
-import { UserData } from '../providers/user-data';
+import { UserService } from '../services/user.service';
 
 
 @Component({
   selector: 'page-account',
-  templateUrl: 'account.html',
-  styleUrls: ['./account.scss'],
+  templateUrl: 'account.page.html',
+  styleUrls: ['./account.page.scss'],
 })
 export class AccountPage implements AfterViewInit {
+  title: string = 'account.title';
   username: string;
 
-  constructor(
-    public alertCtrl: AlertController,
+  constructor(public alertCtrl: AlertController,
     public router: Router,
-    public userData: UserData
-  ) { }
+    private storage: Storage,
+    public userAPI: UserService) { }
 
   ngAfterViewInit() {
     this.getUsername();
@@ -39,7 +40,7 @@ export class AccountPage implements AfterViewInit {
         {
           text: 'Ok',
           handler: (data: any) => {
-            this.userData.setUsername(data.username);
+            this.userAPI.setEmail(data.username);
             this.getUsername();
           }
         }
@@ -56,9 +57,11 @@ export class AccountPage implements AfterViewInit {
     await alert.present();
   }
 
-  getUsername() {
-    this.userData.getUsername().then((username) => {
-      this.username = username;
+  async getUsername() {
+    await this.storage.get('email').then((value) => {
+      if (value) {
+        this.username = value;
+      }
     });
   }
 
@@ -67,7 +70,7 @@ export class AccountPage implements AfterViewInit {
   }
 
   logout() {
-    this.userData.logout();
+    this.userAPI.logout();
     this.router.navigateByUrl('/login');
   }
 
